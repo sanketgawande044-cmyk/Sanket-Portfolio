@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Career Hub</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+        }
+
+        body.dark {
+            background: #111827;
+            color: #f3f4f6;
+        }
+
+        /* SIDEBAR */
+
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 240px;
+            height: 100vh;
+            background: #111827;
+            color: white;
+            padding: 25px 18px;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: bold;
+            margin-bottom: 35px;
+            padding-left: 10px;
+        }
+
+        .logo span {
+            color: #60a5fa;
+        }
+
+        .sidebar ul {
+            list-style: none;
+        }
+
+        .sidebar ul li {
+            margin: 8px 0;
+        }
+
+        .sidebar ul li a {
+            display: block;
+            padding: 12px 14px;
+            color: #d1d5db;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li a.active {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .main {
+            margin-left: 240px;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .topbar h1 {
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .topbar p {
+            color: #6b7280;
+        }
+
+        body.dark .topbar p {
+            color: #9ca3af;
+        }
+
+        .theme-btn {
+            border: none;
+            background: #111827;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        body.dark .theme-btn {
+            background: #374151;
+        }
+
+        /* SEARCH */
+
+        .search-area {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .search-area input,
+        .search-area select {
+            padding: 13px 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .search-area input {
+            flex: 1;
+        }
+
+        body.dark .search-area input,
+        body.dark .search-area select {
+            background: #1f2937;
+            color: white;
+            border-color: #374151;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        body.dark .stat-card {
+            background: #1f2937;
+        }
+
+        .stat-card h3 {
+            color: #6b7280;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        body.dark .stat-card h3 {
+            color: #9ca3af;
+        }
+
+        .stat-card strong {
+            font-size: 28px;
+        }
+
+        /* SECTION */
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+        }
+
+        .section-header h2 {
+            font-size: 22px;
+        }
+
+        /* INTERNSHIPS */
+
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .internship-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            transition: 0.3s;
+        }
+
+        .internship-card:hover {
+            transform: translateY(-4px);
+        }
+
+        body.dark .internship-card {
+            background: #1f2937;
+        }
+
+        .company {
+            font-size: 13px;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        body.dark .company {
+            color: #9ca3af;
+        }
+
+        .internship-card h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 5px 9px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 12px;
+        }
+
+        .internship-card p {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        body.dark .internship-card p {
+            color: #d1d5db;
+        }
+
+        .apply-btn {
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .apply-btn:hover {
+            background: #1d4ed8;
+        }
+
+        .apply-btn.applied {
+            background: #16a34a;
+            cursor: default;
+        }
+
+        /* LEARNING */
+
+        .learning-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .learning-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        body.dark .learning-card {
+            background: #1f2937;
+        }
+
+        .learning-item {
+            margin-bottom: 20px;
+        }
+
+        .learning-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .learning-title {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .progress {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        body.dark .progress {
+            background: #374151;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: #2563eb;
+            border-radius: 20px;
+        }
+
+        /* APPLICATIONS */
+
+        .applications {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+        }
+
+        body.dark .applications {
+            background: #1f2937;
+        }
+
+        .application-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        body.dark .application-row {
+            border-bottom-color: #374151;
+        }
+
+        .application-row:last-child {
+            border-bottom: none;
+        }
+
+        .application-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .application-info p {
+            font-size: 13px;
+            color: #6b7280;
+        }
+
+        body.dark .application-info p {
+            color: #9ca3af;
+        }
+
+        .status {
+            padding: 6px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+        }
+
+        .status.review {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status.shortlisted {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status.pending {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        /* EMPTY SEARCH */
+
+        .no-results {
+            display: none;
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            color: #6b7280;
+        }
+
+        body.dark .no-results {
+            background: #1f2937;
+            color: #9ca3af;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1100px) {
+            .internship-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 800px) {
+            .sidebar {
+                width: 190px;
+            }
+
+            .main {
+                margin-left: 190px;
+                padding: 20px;
+            }
+
+            .learning-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 15px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .sidebar ul {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+
+            .sidebar ul li {
+                margin: 0;
+            }
+
+            .sidebar ul li a {
+                padding: 9px 10px;
+                font-size: 13px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 18px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+            .topbar h1 {
+                font-size: 24px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .stat-card {
+                padding: 16px;
+            }
+
+            .stat-card strong {
+                font-size: 23px;
+            }
+
+            .search-area {
+                flex-direction: column;
+            }
+
+            .internship-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .application-row {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .theme-btn {
+                padding: 8px 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            Career<span>Hub</span>
+        </div>
+
+        <ul>
+            <li>
+                <a href="#dashboard" class="active">Dashboard</a>
+            </li>
+
+            <li>
+                <a href="#internships">Internships</a>
+            </li>
+
+            <li>
+                <a href="#learning">Learning</a>
+            </li>
+
+            <li>
+                <a href="#applications">Applications</a>
+            </li>
+        </ul>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main">
+
+        <!-- TOPBAR -->
+
+        <div class="topbar" id="dashboard">
+
+            <div>
+                <h1>Student Career Dashboard</h1>
+                <p>Track your internships, skills and career progress.</p>
+            </div>
+
+            <button class="theme-btn" onclick="toggleTheme()">
+                🌙 Theme
+            </button>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-area">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search internships..."
+            >
+
+            <select id="categoryFilter">
+
+                <option value="all">
+                    All Categories
+                </option>
+
+                <option value="web">
+                    Web Development
+                </option>
+
+                <option value="java">
+                    Java
+                </option>
+
+                <option value="design">
+                    UI/UX Design
+                </option>
+
+                <option value="data">
+                    Data Science
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <section class="stats">
+
+            <div class="stat-card">
+
+                <h3>Available Internships</h3>
+
+                <strong>24</strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Applications</h3>
+
+                <strong id="applicationCount">
+                    5
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Skills Learning</h3>
+
+                <strong>7</strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <h3>Profile Completion</h3>
+
+                <strong>78%</strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- INTERNSHIPS -->
+
+        <section class="section" id="internships">
+
+            <div class="section-header">
+
+                <h2>Recommended Internships</h2>
+
+            </div>
+
+
+            <div class="internship-grid" id="internshipGrid">
+
+
+                <!-- CARD 1 -->
+
+                <div
+                    class="internship-card"
+                    data-category="web"
+                >
+
+                    <div class="company">
+                        TechNova Solutions
+                    </div>
+
+                    <h3>
+                        Frontend Developer Intern
+                    </h3>
+
+                    <span class="tag">
+                        Web Development
+                    </span>
+
+                    <p>
+                        Work on responsive websites using
+                        HTML, CSS and JavaScript.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 2 -->
+
+                <div
+                    class="internship-card"
+                    data-category="java"
+                >
+
+                    <div class="company">
+                        CodeCraft Labs
+                    </div>
+
+                    <h3>
+                        Java Developer Intern
+                    </h3>
+
+                    <span class="tag">
+                        Java
+                    </span>
+
+                    <p>
+                        Build backend applications and
+                        practice object-oriented programming.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 3 -->
+
+                <div
+                    class="internship-card"
+                    data-category="design"
+                >
+
+                    <div class="company">
+                        PixelWorks Studio
+                    </div>
+
+                    <h3>
+                        UI/UX Design Intern
+                    </h3>
+
+                    <span class="tag">
+                        UI/UX Design
+                    </span>
+
+                    <p>
+                        Create modern interfaces and
+                        improve user experience.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 4 -->
+
+                <div
+                    class="internship-card"
+                    data-category="data"
+                >
+
+                    <div class="company">
+                        DataMind Analytics
+                    </div>
+
+                    <h3>
+                        Data Analyst Intern
+                    </h3>
+
+                    <span class="tag">
+                        Data Science
+                    </span>
+
+                    <p>
+                        Analyze datasets and create
+                        meaningful business insights.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 5 -->
+
+                <div
+                    class="internship-card"
+                    data-category="web"
+                >
+
+                    <div class="company">
+                        WebSphere Technologies
+                    </div>
+
+                    <h3>
+                        Web Developer Intern
+                    </h3>
+
+                    <span class="tag">
+                        Web Development
+                    </span>
+
+                    <p>
+                        Develop and maintain modern
+                        responsive web applications.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+
+                <!-- CARD 6 -->
+
+                <div
+                    class="internship-card"
+                    data-category="java"
+                >
+
+                    <div class="company">
+                        InnovateX
+                    </div>
+
+                    <h3>
+                        Software Developer Intern
+                    </h3>
+
+                    <span class="tag">
+                        Java
+                    </span>
+
+                    <p>
+                        Work with developers to build
+                        scalable software solutions.
+                    </p>
+
+                    <button
+                        class="apply-btn"
+                        onclick="applyInternship(this)"
+                    >
+                        Apply Now
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="no-results"
+                id="noResults"
+            >
+                No internships found.
+            </div>
+
+        </section>
+
+
+        <!-- LEARNING -->
+
+        <section
+            class="section"
+            id="learning"
+        >
+
+            <div class="section-header">
+
+                <h2>Learning Progress</h2>
+
+            </div>
+
+
+            <div class="learning-grid">
+
+
+                <div class="learning-card">
+
+                    <div class="learning-item">
+
+                        <div class="learning-title">
+
+                            <span>
+                                HTML & CSS
+                            </span>
+
+                            <strong>
+                                90%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: 90%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="learning-item">
+
+                        <div class="learning-title">
+
+                            <span>
+                                JavaScript
+                            </span>
+
+                            <strong>
+                                70%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: 70%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="learning-card">
+
+                    <div class="learning-item">
+
+                        <div class="learning-title">
+
+                            <span>
+                                Java
+                            </span>
+
+                            <strong>
+                                80%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: 80%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="learning-item">
+
+                        <div class="learning-title">
+
+                            <span>
+                                Data Structures
+                            </span>
+
+                            <strong>
+                                65%
+                            </strong>
+
+                        </div>
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: 65%;"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- APPLICATIONS -->
+
+        <section
+            class="section"
+            id="applications"
+        >
+
+            <div class="section-header">
+
+                <h2>Recent Applications</h2>
+
+            </div>
+
+
+            <div class="applications">
+
+
+                <div class="application-row">
+
+                    <div class="application-info">
+
+                        <h4>
+                            Frontend Developer Intern
+                        </h4>
+
+                        <p>
+                            TechNova Solutions
+                        </p>
+
+                    </div>
+
+                    <span class="status review">
+                        Under Review
+                    </span>
+
+                </div>
+
+
+                <div class="application-row">
+
+                    <div class="application-info">
+
+                        <h4>
+                            Java Developer Intern
+                        </h4>
+
+                        <p>
+                            CodeCraft Labs
+                        </p>
+
+                    </div>
+
+                    <span class="status shortlisted">
+                        Shortlisted
+                    </span>
+
+                </div>
+
+
+                <div class="application-row">
+
+                    <div class="application-info">
+
+                        <h4>
+                            UI/UX Design Intern
+                        </h4>
+
+                        <p>
+                            PixelWorks Studio
+                        </p>
+
+                    </div>
+
+                    <span class="status pending">
+                        Pending
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+        /* APPLICATION COUNT */
+
+        let applications =
+            Number(
+                localStorage.getItem("careerApplications")
+            ) || 5;
+
+
+        document.getElementById(
+            "applicationCount"
+        ).textContent = applications;
+
+
+        /* APPLY INTERNSHIP */
+
+        function applyInternship(button) {
+
+            if (button.classList.contains("applied")) {
+                return;
+            }
+
+            button.classList.add("applied");
+
+            button.textContent = "Applied ✓";
+
+            applications++;
+
+            document.getElementById(
+                "applicationCount"
+            ).textContent = applications;
+
+            localStorage.setItem(
+                "careerApplications",
+                applications
+            );
+        }
+
+
+        /* SEARCH */
+
+        const searchInput =
+            document.getElementById("searchInput");
+
+        const categoryFilter =
+            document.getElementById("categoryFilter");
+
+        const cards =
+            document.querySelectorAll(".internship-card");
+
+        const noResults =
+            document.getElementById("noResults");
+
+
+        function filterInternships() {
+
+            const searchValue =
+                searchInput.value.toLowerCase().trim();
+
+            const categoryValue =
+                categoryFilter.value;
+
+            let visibleCards = 0;
+
+
+            cards.forEach(function(card) {
+
+                const text =
+                    card.innerText.toLowerCase();
+
+                const category =
+                    card.getAttribute("data-category");
+
+
+                const matchesSearch =
+                    text.includes(searchValue);
+
+                const matchesCategory =
+                    categoryValue === "all" ||
+                    category === categoryValue;
+
+
+                if (
+                    matchesSearch &&
+                    matchesCategory
+                ) {
+
+                    card.style.display = "";
+
+                    visibleCards++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visibleCards === 0) {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            filterInternships
+        );
+
+
+        categoryFilter.addEventListener(
+            "change",
+            filterInternships
+        );
+
+
+        /* DARK / LIGHT THEME */
+
+        function toggleTheme() {
+
+            document.body.classList.toggle("dark");
+
+            const isDark =
+                document.body.classList.contains("dark");
+
+            localStorage.setItem(
+                "careerTheme",
+                isDark ? "dark" : "light"
+            );
+
+        }
+
+
+        /* LOAD SAVED THEME */
+
+        const savedTheme =
+            localStorage.getItem("careerTheme");
+
+
+        if (savedTheme === "dark") {
+
+            document.body.classList.add("dark");
+
+        }
+
+    </script>
+
+</body>
+</html>
