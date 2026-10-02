@@ -249,6 +249,16 @@ body {
     box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
     transform: rotate(2deg);
 }
+.photo-placeholder {
+    overflow: hidden;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
 .photo-placeholder::before {
     content: "";
